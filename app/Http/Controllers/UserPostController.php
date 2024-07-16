@@ -17,7 +17,7 @@ class UserPostController extends Controller
         DB::enableQueryLog();
 
         // Fetch paginated posts
-        $posts = $user->posts()->paginate(5);
+        $posts = $user->posts()->paginate(10);
 
         // Retrieve logged queries
         $queries = DB::getQueryLog();
