@@ -22,4 +22,4 @@ Route::get('posts/{slug}', [\App\Http\Controllers\PostController::class, 'view']
 Route::get('/users/{userId}/posts', [UserPostController::class, 'index'])->name('user.posts');  // The route for UserPostController
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
->
+
