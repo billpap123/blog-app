@@ -17,11 +17,12 @@ class PostFactory extends Factory
      */
     public function definition()
     {
-        return [
-            'title' => fake()->name,
-            'body'  => fake()->text(2000),
-            'slug'  => fake()->slug,
-            'published_at' => Carbon::now(),
+      return [
+            'title' => $this->faker->sentence,
+            'body' => $this->faker->paragraph,
+            'slug' => $this->faker->slug,
+            'published_at' => now(),
+            'author_id' => User::factory(),
         ];
     }
 }
