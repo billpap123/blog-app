@@ -1,8 +1,8 @@
-PostFactory.php code:
 <?php
 
 namespace Database\Factories;
 
+use App\Models\User; // Ensure this line is present
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class PostFactory extends Factory
 {
+    protected $model = \App\Models\Post::class;
+
     /**
      * Define the model's default state.
      *
@@ -19,10 +21,11 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'title' => fake()->name,
-            'body'  => fake()->text(2000),
-            'slug'  => fake()->slug,
+            'title' => $this->faker->sentence,
+            'body' => $this->faker->paragraph,
+            'slug' => $this->faker->slug,
             'published_at' => Carbon::now(),
+            'author_id' => User::factory(),
         ];
     }
 }
