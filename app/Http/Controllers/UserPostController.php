@@ -1,5 +1,3 @@
-<?php
-
 namespace App\Http\Controllers;
 
 use App\Models\User;
@@ -10,17 +8,20 @@ class UserPostController extends Controller
 {
     public function index($userId)
     {
-        // Eager load posts when user is fetched
-        $user = User::with('posts')->findOrFail($userId);
-
-        // Enable query logging
+        DB::flushQueryLog();
         DB::enableQueryLog();
 
-        // Fetch paginated posts
+        $user = User::with('posts')->findOrFail($userId);
+
         $posts = $user->posts()->paginate(10);
 
         // Retrieve logged queries
         $queries = DB::getQueryLog();
+
+        // Log the queries for debugging
+        foreach ($queries as $query) {
+            \Log::info(json_encode($query));
+        }
 
         // Pass data to the view
         return view('posts.user-posts', compact('user', 'posts', 'queries'));
