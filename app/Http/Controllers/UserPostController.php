@@ -11,8 +11,11 @@ class UserPostController extends Controller
     {
         // Eager load posts when user is fetched
         $user = User::with('posts')->findOrFail($userId);
-
+// Enable query logging
+        DB::enableQueryLog();
         $posts = $user->posts()->paginate(5);
+ // Retrieve logged queries
+        $queries = DB::getQueryLog();
 
         return view('posts.user-posts', compact('user', 'posts'));
     }
