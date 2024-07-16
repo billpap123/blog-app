@@ -20,5 +20,7 @@ Route::get('/',[\App\Http\Controllers\PostController::class,'index'])->name('ind
 
 Route::get('posts/{slug}',[\App\Http\Controllers\PostController::class,'view'])->name('post.view');
 
+Route::get('/users/{userId}/posts', [UserPostController::class, 'index'])->name('user.posts');
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
