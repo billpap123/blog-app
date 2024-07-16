@@ -10,11 +10,14 @@ class UserPostController extends Controller
 {
     public function index($userId)
     {
+        // Flush and enable query log
         DB::flushQueryLog();
         DB::enableQueryLog();
 
+        // Eager load the posts relationship
         $user = User::with('posts')->findOrFail($userId);
 
+        // Paginate posts
         $posts = $user->posts()->paginate(10);
 
         // Retrieve logged queries
