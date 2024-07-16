@@ -1,3 +1,4 @@
+PostFactory.php code:
 <?php
 
 namespace Database\Factories;
@@ -17,13 +18,11 @@ class PostFactory extends Factory
      */
     public function definition()
     {
-    
         return [
-            'title' => $this->faker->sentence,
-            'body' => $this->faker->paragraph,
-            'slug' => $this->faker->slug,
-            'published_at' => now(),
-            'author_id' => User::factory(),
+            'title' => fake()->name,
+            'body'  => fake()->text(2000),
+            'slug'  => fake()->slug,
+            'published_at' => Carbon::now(),
         ];
     }
 }
